@@ -6,7 +6,7 @@ export default function ProductCard({ product }) {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="relative h-48 w-full">
         <Image
-          src={product.image || '/placeholder-product.jpg'}
+          src={product.image || '/placeholder-product.svg'}
           alt={product.name}
           fill
           className="object-cover"
