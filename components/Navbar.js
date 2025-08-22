@@ -2,10 +2,11 @@
 
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -38,9 +39,11 @@ export default function Navbar() {
                   Add Product
                 </Link>
                 <div className="flex items-center space-x-2">
-                  <img 
+                  <Image 
                     src={session.user.image || '/default-avatar.png'} 
                     alt="Profile" 
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full"
                   />
                   <span className="text-gray-700 dark:text-gray-300 text-sm">
@@ -104,9 +107,11 @@ export default function Navbar() {
                   </Link>
                   <div className="px-3 py-2">
                     <div className="flex items-center space-x-2">
-                      <img 
+                      <Image 
                         src={session.user.image || '/default-avatar.png'} 
                         alt="Profile" 
+                        width={32}
+                        height={32}
                         className="w-8 h-8 rounded-full"
                       />
                       <span className="text-gray-700 dark:text-gray-300 text-sm">

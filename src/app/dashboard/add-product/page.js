@@ -73,7 +73,7 @@ export default function AddProductPage() {
         throw new Error('Failed to create product');
       }
 
-      const newProduct = await response.json();
+      await response.json();
       
       // Show success toast
       setToastMessage('Product created successfully!');

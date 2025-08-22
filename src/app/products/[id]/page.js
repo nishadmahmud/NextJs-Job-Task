@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
-import Image from 'next/image';
+import Link from 'next/link';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 
 export default function ProductDetailsPage() {
@@ -15,9 +15,9 @@ export default function ProductDetailsPage() {
     if (params.id) {
       fetchProduct();
     }
-  }, [params.id]);
+  }, [params.id, fetchProduct]);
 
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/products/${params.id}`);
@@ -31,7 +31,7 @@ export default function ProductDetailsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id]);
 
   if (loading) {
     return (
@@ -51,12 +51,12 @@ export default function ProductDetailsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             {error || 'The product you are looking for does not exist.'}
           </p>
-          <a
+          <Link
             href="/products"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
           >
             Back to Products
-          </a>
+          </Link>
         </div>
       </div>
     );
@@ -69,17 +69,17 @@ export default function ProductDetailsPage() {
         <nav className="mb-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
             <li>
-              <a href="/" className="hover:text-blue-600 dark:hover:text-blue-400">
+              <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <span className="mx-2">/</span>
             </li>
             <li>
-              <a href="/products" className="hover:text-blue-600 dark:hover:text-blue-400">
+              <Link href="/products" className="hover:text-blue-600 dark:hover:text-blue-400">
                 Products
-              </a>
+              </Link>
             </li>
             <li>
               <span className="mx-2">/</span>
@@ -177,7 +177,7 @@ export default function ProductDetailsPage() {
 
         {/* Back to Products */}
         <div className="mt-12 text-center">
-          <a
+          <Link
             href="/products"
             className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
           >
@@ -185,7 +185,7 @@ export default function ProductDetailsPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Products
-          </a>
+          </Link>
         </div>
       </div>
     </div>
